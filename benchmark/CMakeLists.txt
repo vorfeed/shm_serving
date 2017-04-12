@@ -1,0 +1,14 @@
+aux_source_directory(. benchmark_SRCS)
+
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+add_library(benchmark_lib ${benchmark_SRCS})
+
+target_link_libraries(
+  benchmark_lib serving_lib
+)
+
+add_executable(benchmark_mapping_visit_server benchmark_mapping_visit_server.cpp)
+target_link_libraries(benchmark_mapping_visit_server benchmark_lib)
+
+add_executable(benchmark_mapping_visit_client benchmark_mapping_visit_client.cpp)
+target_link_libraries(benchmark_mapping_visit_client benchmark_lib)
